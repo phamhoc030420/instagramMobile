@@ -51,20 +51,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-  //modal
-  footer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    color: 'black',
-    marginHorizontal: 30,
-  },
-  iconFooter: {
-    color: 'black',
-    marginRight: 20,
-    fontSize: 20,
-    marginTop: 10,
-  },
   iconFoters: {
     color: 'black',
     marginRight: 20,
@@ -123,6 +109,8 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 50,
+    borderWidth: 1,
+    borderColor: 'red',
   },
   imageContents: {
     width: 30,

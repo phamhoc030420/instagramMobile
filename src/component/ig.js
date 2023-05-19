@@ -16,6 +16,8 @@ import {
   Pressable,
   TextInput,
 } from 'react-native';
+import Slick from 'react-native-slick';
+import RightHome from './rightHome';
 const Instagram = () => {
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -171,38 +173,6 @@ const Instagram = () => {
             </SafeAreaView>
           </View>
         </SafeAreaView>
-      </View>
-      <View style={styles.footer}>
-        <Foundation
-          onPress={() => handleSearch('Home')}
-          style={styles.iconFooter}
-          name={'home'}
-          size={30}
-        />
-        <Feather
-          onPress={() => handleSearch('Search')}
-          style={styles.iconFooter}
-          name={'search'}
-          size={30}
-        />
-        <AntDesign
-          onPress={() => handleSearch('Instagram')}
-          style={styles.iconFooter}
-          name={'instagram'}
-          size={30}
-        />
-        <AntDesign
-          onPress={() => handleSearch('Heart')}
-          style={styles.iconFooter}
-          name={'heart'}
-          size={30}
-        />
-        <AntDesign
-          onPress={() => handleSearch('User')}
-          style={styles.iconFooter}
-          name={'user'}
-          size={30}
-        />
       </View>
     </View>
   );
