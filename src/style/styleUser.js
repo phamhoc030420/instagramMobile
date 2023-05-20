@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   userContent: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginTop: 50,
+    marginTop: 30,
   },
   userContentImg: {
     width: 80,
@@ -41,9 +41,23 @@ const styles = StyleSheet.create({
   userButton: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 40,
+    marginTop: 30,
   },
   userButtonItem: {
+    color: 'black',
+    overflow: 'hidden',
+    width: 170,
+    height: 35,
+    borderWidth: 1,
+    borderRadius: 10,
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    backgroundColor: '#DEE1E6',
+    borderColor: '#fff',
+    paddingLeft: 10,
+  },
+  userText: {
     color: 'black',
   },
 });

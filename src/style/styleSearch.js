@@ -7,11 +7,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: '#DCDCDC',
     borderRadius: 10,
+    paddingLeft: 10,
   },
   rightHomeHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 20,
+    paddingHorizontal: 15,
   },
   colorIcon: {
     color: 'black',
@@ -39,8 +41,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 50,
   },
-  rightText1: {fontSize: 20},
-  rightText2: {marginHorizontal: 40, marginTop: 20},
+  rightText1: {fontSize: 20, textAlign: 'center'},
+  rightText2: {marginTop: 20, textAlign: 'center'},
   rightText3: {
     color: 'blue',
   },

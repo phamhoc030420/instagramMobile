@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   iconFoters: {
     color: 'black',
     marginRight: 20,
-    fontSize: 30,
+    fontSize: 20,
     marginTop: 8,
   },
   totalImg: {
@@ -67,10 +67,10 @@ const styles = StyleSheet.create({
   },
   nameBanner: {
     color: 'black',
-    marginLeft: 25,
+    marginLeft: 20,
+    position: 'relative',
   },
   add: {
-    fontSize: 20,
     paddingLeft: 10,
     color: 'black',
     paddingRight: 10,
@@ -80,9 +80,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     alignItems: 'center',
   },
-  itemBanner: {
+  homeBanner: {
     flexDirection: 'column',
+  },
+  itemBanner: {
     marginHorizontal: 10,
+    width: 68,
+    height: 68,
+    backgroundColor: 'white',
+    borderWidth: 1.8,
+    borderRadius: 100,
+    borderColor: '#c13584',
+    justifyContent: 'center',
   },
   like: {
     color: 'black',
@@ -106,11 +115,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   imageContent: {
-    width: 60,
-    height: 60,
-    borderRadius: 50,
-    borderWidth: 1,
-    borderColor: 'red',
+    width: '92%',
+    height: '92%',
+    borderRadius: 100,
+    borderColor: 'orange',
+    position: 'absolute',
+    right: '4%',
   },
   imageContents: {
     width: 30,

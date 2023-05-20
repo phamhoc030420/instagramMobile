@@ -44,11 +44,12 @@ const User = ({navigation}) => {
           </View>
         </View>
         <View style={styles.userButton}>
-          <Button
-            style={styles.userButtonItem}
-            title="Chỉnh sửa trang cá nhân"
-          />
-          <Button style={styles.userButtonItem} title="Chia sẻ trang cá nhân" />
+          <View style={styles.userButtonItem}>
+            <Text style={styles.userText}>Chỉnh sửa trang cá nhân</Text>
+          </View>
+          <View style={styles.userButtonItem}>
+            <Text style={styles.userText}>Chia sẻ trang cá nhân</Text>
+          </View>
         </View>
       </View>
       <View>

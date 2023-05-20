@@ -17,11 +17,11 @@ const RightHome = ({navigation}) => {
           onPress={() => navigation.navigate('Home')}
         />
         <Text style={[styles.colorIcon, styles.nameUser]}>User123</Text>
-        <AntDesign style={styles.colorIcon} name={'camerao'} size={30} />
+        <AntDesign style={styles.colorIcon} name={'videocamera'} size={25} />
         <FontAwesome
           style={styles.colorIcon}
           name={'pencil-square-o'}
-          size={30}
+          size={25}
         />
       </View>
       <TextInput
