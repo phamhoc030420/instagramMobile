@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styles from '../style/styleUser';
 import {Text, View, Image, Button} from 'react-native';
 import RightHome from './rightHome';
@@ -8,16 +8,24 @@ import Slick from 'react-native-slick';
 const User = ({navigation}) => {
   return (
     <Slick showsButtons={false} showsPagination={false} loop={false}>
-      <View style={styles.containers}>
+      <View style={{backgroundColor: 'white', flex: 1}}>
         <View style={styles.userHeader}>
-          <Text
-            style={styles.textUser}
-            onPress={() => navigation.navigate('Home')}>
-            user123
-          </Text>
+          <View style={styles.userHeaderLeft}>
+            <Text
+              style={styles.textUser}
+              onPress={() => navigation.navigate('Home')}>
+              user123
+            </Text>
+            <Feather style={styles.selectUser} name={'chevron-down'} />
+          </View>
+
           <View style={styles.userIconHeader}>
-            <MaterialIcons style={styles.iconFirst} name={'add'} size={30} />
-            <Feather style={styles.colorText} name={'menu'} size={30} />
+            <FontAwesome
+              style={styles.iconFirst}
+              name={'plus-square-o'}
+              size={25}
+            />
+            <Feather style={styles.colorText} name={'menu'} size={25} />
           </View>
         </View>
         <View style={styles.userContent}>
@@ -32,15 +40,15 @@ const User = ({navigation}) => {
           </View>
           <View style={styles.userTextCenter}>
             <Text style={styles.userText}>123</Text>
-            <Text style={styles.userText}>Bài Viết</Text>
+            <Text style={styles.userTexts}>Bài Viết</Text>
           </View>
           <View style={styles.userTextCenter}>
             <Text style={styles.userText}>100K+</Text>
-            <Text style={styles.userText}>Người theo dõi</Text>
+            <Text style={styles.userTexts}>Người theo dõi</Text>
           </View>
           <View style={styles.userTextCenter}>
             <Text style={styles.userText}>2</Text>
-            <Text style={styles.userText}>Đang theo dõi</Text>
+            <Text style={styles.userTexts}>Đang theo dõi</Text>
           </View>
         </View>
         <View style={styles.userButton}>

@@ -7,16 +7,27 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     justifyContent: 'space-between',
   },
+  userHeaderLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   userIconHeader: {
     flexDirection: 'row',
+    marginTop: 10,
   },
   iconFirst: {
     marginRight: 20,
     color: 'black',
   },
   textUser: {
-    fontSize: 30,
+    fontSize: 25,
+    fontWeight: 'bold',
     color: 'black',
+  },
+  selectUser: {
+    fontSize: 18,
+    marginLeft: 5,
+    fontWeight: 'bold',
   },
   userContent: {
     flexDirection: 'row',
@@ -28,10 +39,6 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 50,
   },
-  userText: {
-    color: 'black',
-    fontSize: 16,
-  },
   userTextCenter: {
     alignItems: 'center',
   },
@@ -42,6 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 30,
+    marginHorizontal: 8,
   },
   userButtonItem: {
     color: 'black',
@@ -58,6 +66,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   userText: {
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  userTexts: {
     color: 'black',
   },
 });
