@@ -1,10 +1,10 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MainRoute from './mainRoute';
-import Login from '../component/login';
 import {NavigationContainer} from '@react-navigation/native';
-import Detail from '../component/detail';
-import Register from '../component/register';
+import Login from '../component/Authentication/login';
+import Detail from '../component/home/detail';
+import Register from '../component/Authentication/register';
 const Stack = createNativeStackNavigator();
 const AutheRoute = () => {
   return (

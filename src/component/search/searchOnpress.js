@@ -1,25 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import styles from '../style/styleSearch';
+import styles from '../../style/search/styleSearch';
 import {Text, View, Image, Button, TextInput} from 'react-native';
 const SearchOnPress = ({navigation}) => {
   const data = [
     {
       id: 1,
-      image: require('../assets/image/post1.jpg'),
+      image: require('../../assets/image/post1.jpg'),
       tk: '_hello.miniii_',
       name: 'Trần Lê Hà My',
     },
     {
       id: 2,
-      image: require('../assets/image/post10.jpg'),
+      image: require('../../assets/image/post10.jpg'),
       tk: 'abcd_xyz',
       name: 'Trần Huyền Diệp',
     },
     {
       id: 3,
-      image: require('../assets/image/post6.jpg'),
+      image: require('../../assets/image/post6.jpg'),
       tk: 'Kitty_sss',
       name: 'Ly Ly',
     },

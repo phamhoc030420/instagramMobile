@@ -1,13 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {
-  Text,
-  View,
-  Image,
-  Button,
-  TextInput,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+import {Text, View, Image, Dimensions, TouchableOpacity} from 'react-native';
 import {SwiperFlatList} from 'react-native-swiper-flatlist';
 import {videoData} from './videodata';
 import Video from 'react-native-video';

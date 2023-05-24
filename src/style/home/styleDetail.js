@@ -1,5 +1,9 @@
 import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
+  detailContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
   imageAvarta: {
     width: 60,
     height: 60,
