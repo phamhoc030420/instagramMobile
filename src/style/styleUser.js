@@ -65,6 +65,11 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
     paddingLeft: 10,
   },
+  logOut: {
+    marginTop: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   userText: {
     color: 'black',
     fontWeight: 'bold',

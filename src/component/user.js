@@ -2,10 +2,20 @@ import React, {useEffect, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styles from '../style/styleUser';
-import {Text, View, Image, Button} from 'react-native';
+import {Text, View, Image, ToastAndroid} from 'react-native';
 import RightHome from './rightHome';
 import Slick from 'react-native-slick';
+import {signOut} from 'firebase/auth';
+import {authentication} from '../../firebase/firebase-config';
 const User = ({navigation}) => {
+  const handleLogOut = () => {
+    signOut(authentication)
+      .then(() => {
+        ToastAndroid.show('Logut success !', ToastAndroid.SHORT);
+        navigation.navigate('Authentication');
+      })
+      .catch(error => {});
+  };
   return (
     <Slick showsButtons={false} showsPagination={false} loop={false}>
       <View style={{backgroundColor: 'white', flex: 1}}>
@@ -57,6 +67,13 @@ const User = ({navigation}) => {
           </View>
           <View style={styles.userButtonItem}>
             <Text style={styles.userText}>Chia sẻ trang cá nhân</Text>
+          </View>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <View
+            onTouchStart={handleLogOut}
+            style={[styles.userButtonItem, styles.logOut]}>
+            <Text style={styles.userText}>Logout</Text>
           </View>
         </View>
       </View>

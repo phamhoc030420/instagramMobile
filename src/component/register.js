@@ -2,37 +2,30 @@ import React, {useEffect, useState} from 'react';
 import styles from '../style/styleLogin';
 import {Text, View, TextInput, ToastAndroid} from 'react-native';
 import {authentication} from '../../firebase/firebase-config';
-import {signInWithEmailAndPassword} from 'firebase/auth';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const Login = ({navigation}) => {
+const Register = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [passWord, setPassWord] = useState('');
-  const handleLogIn = () => {
-    if (!email === true || !passWord === true) {
-      ToastAndroid.show('Please enter !', ToastAndroid.SHORT);
-      return;
-    }
-    signInWithEmailAndPassword(authentication, email, passWord)
+  const [isSign, setIsSign] = useState(false);
+  const handleRegister = () => {
+    createUserWithEmailAndPassword(authentication, email, passWord)
       .then(userCredential => {
-        // Signed in
+        setIsSign(true);
         const user = userCredential.user;
-        ToastAndroid.show('Login success !', ToastAndroid.SHORT);
-        setEmail('');
-        setPassWord('');
-        navigation.navigate('MainRoute');
+        ToastAndroid.show('Register success !', ToastAndroid.SHORT);
+        navigation.navigate('Authentication');
       })
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        setEmail('');
-        setPassWord('');
-        ToastAndroid.show('Wrong account or password !', ToastAndroid.SHORT);
+        ToastAndroid.show('Register error !', ToastAndroid.SHORT);
       });
   };
   return (
     <View style={styles.loginContainer}>
-      <Text style={styles.loginSignIn}>Sign In </Text>
+      <Text style={styles.loginSignIn}>Register </Text>
       <TextInput
         value={email}
         onChangeText={e => setEmail(e)}
@@ -46,15 +39,15 @@ const Login = ({navigation}) => {
         style={styles.loginText1}
         placeholder="Passsword"
         placeholderTextColor={'white'}></TextInput>
-      <View onTouchStart={handleLogIn} style={styles.loginButton}>
-        <Text style={styles.loginButtonText}>Log In</Text>
+      <View onTouchStart={handleRegister} style={styles.loginButton}>
+        <Text style={styles.loginButtonText}>Register</Text>
       </View>
       <View style={styles.bottom}>
         <Text style={styles.cant}>Can't Login? </Text>
         <Text
           style={styles.forgot}
-          onPress={() => navigation.navigate('register')}>
-          Register Account{' '}
+          onPress={() => navigation.navigate('Authentication')}>
+          Login{' '}
         </Text>
       </View>
       <View style={styles.iconLogin}>
@@ -77,4 +70,4 @@ const Login = ({navigation}) => {
     </View>
   );
 };
-export default Login;
+export default Register;
