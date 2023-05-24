@@ -5,96 +5,62 @@
  * @format
  */
 
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React, {useEffect, useState, createContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Instagram from './src/component/ig';
-import {Image, View} from 'react-native';
-import Foundation from 'react-native-vector-icons/Foundation';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import User from './src/component/user';
-import Search from './src/component/search';
-import Camera from './src/component/camera';
-import {MenuProvider} from 'react-native-popup-menu';
-import Video from './src/component/video';
 const Tab = createBottomTabNavigator();
+import {PermissionsAndroid, BackHandler} from 'react-native';
+import AutheRoute from './src/routes/authenRoute';
+import RNBootSplash from 'react-native-bootsplash';
+export const ThemeContext = createContext();
 const App = () => {
+  const [datas, setDatas] = useState([]);
+  useEffect(() => {
+    const init = async () => {
+      //permission
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          {
+            title: 'Cool Photo App Camera Permission',
+            message:
+              'Cool Photo App needs access to your camera ' +
+              'so you can take awesome pictures.',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('You can use the camera');
+        } else {
+          BackHandler.exitApp();
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+      //
+      const response = await fetch(
+        'https://64677693ba7110b663b98c03.mockapi.io/api/Instagram/users',
+        {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        },
+      );
+      const data = await response.json();
+      setDatas(data);
+    };
+
+    init().finally(async () => {
+      await RNBootSplash.hide({fade: true, duration: 10});
+      console.log('BootSplash has been hidden successfully');
+    });
+  }, []);
   return (
-    <>
-      <MenuProvider>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={{
-              headerShown: false,
-            }}>
-            <Tab.Screen
-              name="Home"
-              component={Instagram}
-              options={{
-                tabBarIcon: ({focus}) => (
-                  <Foundation
-                    style={{color: 'black'}}
-                    name={'home'}
-                    size={28}
-                  />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Search"
-              component={Search}
-              options={{
-                tabBarIcon: ({focus}) => (
-                  <Feather style={{color: 'black'}} name={'search'} size={28} />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Camera"
-              component={Camera}
-              options={{
-                tabBarIcon: ({focus}) => (
-                  <AntDesign
-                    style={{color: 'black'}}
-                    name={'instagram'}
-                    size={28}
-                  />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="Video"
-              component={Video}
-              options={{
-                tabBarIcon: ({focus}) => (
-                  <MaterialCommunityIcons
-                    style={{color: 'black'}}
-                    name={'movie-outline'}
-                    size={28}
-                  />
-                ),
-              }}
-            />
-            <Tab.Screen
-              name="User"
-              component={User}
-              options={{
-                tabBarIcon: ({focus}) => (
-                  <Image
-                    style={{width: 28, height: 28, borderRadius: 100}}
-                    source={{
-                      uri: 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Ros%C3%A9_at_a_fan_signing_event_on_September_25%2C_2022_%28cropped%29.jpg',
-                    }}
-                  />
-                ),
-              }}
-            />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </MenuProvider>
-    </>
+    <ThemeContext.Provider value={datas}>
+      <AutheRoute />
+    </ThemeContext.Provider>
   );
 };
 export default App;
