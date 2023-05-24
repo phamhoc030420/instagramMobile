@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import styles from '../style/styleImage';
+import styles from '../../style/search/styleImage';
+
 import {
   Text,
   View,
@@ -18,30 +19,30 @@ const SearchImage = ({navigation}) => {
     {
       id: 1,
       images: [
-        require('../assets/image/post1.jpg'),
-        require('../assets/image/post2.jpg'),
-        require('../assets/image/post3.jpg'),
-        require('../assets/image/post4.jpg'),
-        require('../assets/image/post5.jpg'),
-        require('../assets/image/post6.jpg'),
+        require('../../assets/image/post1.jpg'),
+        require('../../assets/image/post2.jpg'),
+        require('../../assets/image/post3.jpg'),
+        require('../../assets/image/post4.jpg'),
+        require('../../assets/image/post5.jpg'),
+        require('../../assets/image/post6.jpg'),
       ],
     },
     {
       id: 2,
       images: [
-        require('../assets/image/post7.jpg'),
-        require('../assets/image/post8.jpg'),
-        require('../assets/image/post9.jpg'),
-        require('../assets/image/post10.jpg'),
-        require('../assets/image/post14.jpg'),
+        require('../../assets/image/post7.jpg'),
+        require('../../assets/image/post8.jpg'),
+        require('../../assets/image/post9.jpg'),
+        require('../../assets/image/post10.jpg'),
+        require('../../assets/image/post14.jpg'),
       ],
     },
     {
       id: 3,
       images: [
-        require('../assets/image/post15.jpg'),
-        require('../assets/image/post13.jpg'),
-        require('../assets/image/post12.jpg'),
+        require('../../assets/image/post15.jpg'),
+        require('../../assets/image/post13.jpg'),
+        require('../../assets/image/post12.jpg'),
       ],
     },
   ];

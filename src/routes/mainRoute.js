@@ -9,12 +9,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {MenuProvider} from 'react-native-popup-menu';
 const Tab = createBottomTabNavigator();
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Instagram from '../component/ig';
-import Search from '../component/search';
-import Camera from '../component/camera';
-import Video from '../component/video';
-import User from '../component/user';
-import Detail from '../component/detail';
+import Camera from '../component/Camera/camera';
+import Search from '../component/search/search';
+import Instagram from '../component/home/ig';
+import Video from '../component/Reels/video';
+import User from '../component/user/user';
 const Stack = createNativeStackNavigator();
 const MainRoute = () => {
   return (
@@ -27,6 +26,7 @@ const MainRoute = () => {
           name="Home"
           component={Instagram}
           options={{
+            tabBarShowLabel: false,
             tabBarIcon: ({focus}) => (
               <Foundation style={{color: 'black'}} name={'home'} size={28} />
             ),
@@ -36,6 +36,7 @@ const MainRoute = () => {
           name="Search"
           component={Search}
           options={{
+            tabBarShowLabel: false,
             tabBarIcon: ({focus}) => (
               <Feather style={{color: 'black'}} name={'search'} size={28} />
             ),
@@ -45,6 +46,7 @@ const MainRoute = () => {
           name="Camera"
           component={Camera}
           options={{
+            tabBarShowLabel: false,
             tabBarIcon: ({focus}) => (
               <AntDesign
                 style={{color: 'black'}}
@@ -58,6 +60,7 @@ const MainRoute = () => {
           name="Video"
           component={Video}
           options={{
+            tabBarShowLabel: false,
             tabBarIcon: ({focus}) => (
               <MaterialCommunityIcons
                 style={{color: 'black'}}
@@ -71,6 +74,7 @@ const MainRoute = () => {
           name="User"
           component={User}
           options={{
+            tabBarShowLabel: false,
             tabBarIcon: ({focus}) => (
               <Image
                 style={{width: 28, height: 28, borderRadius: 100}}

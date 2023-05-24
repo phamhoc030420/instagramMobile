@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
   iconFirst: {
     marginRight: 20,
     color: 'black',
+    zIndex: 100,
   },
   textUser: {
     fontSize: 25,
@@ -76,6 +77,79 @@ const styles = StyleSheet.create({
   },
   userTexts: {
     color: 'black',
+  },
+  popupItem: {
+    paddingTop: 20,
+    paddingHorizontal: 20,
+  },
+  itembottom: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  itembottoms: {
+    paddingBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+    borderBottomWidth: 0.6,
+    borderBottomColor: '#E8EAED',
+  },
+  itembottomUSer: {
+    paddingBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  itembottomUSerFirst: {
+    paddingBottom: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+    justifyContent: 'space-between',
+  },
+  textItem: {
+    marginLeft: 20,
+    color: 'black',
+    fontSize: 16,
+  },
+  textItemsuser: {
+    marginLeft: 20,
+    color: 'black',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  textItems: {
+    marginLeft: 20,
+    color: 'black',
+    fontSize: 16,
+  },
+  imgPopUp: {
+    width: 50,
+    height: 50,
+    borderRadius: 100,
+  },
+  iconAddAcc: {
+    color: 'black',
+  },
+  radio: {
+    width: 30,
+    height: 30,
+    borderRadius: 100,
+    backgroundColor: '#23A0FD',
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  radioChild: {
+    width: 10,
+    height: 10,
+    backgroundColor: 'white',
+    borderRadius: 100,
+  },
+  accLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
 export default styles;

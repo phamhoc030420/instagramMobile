@@ -1,13 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import styles from '../style/styleCamera';
-import {
-  Text,
-  View,
-  Image,
-  Button,
-  TextInput,
-  PermissionsAndroid,
-} from 'react-native';
+import styles from '../../style/camera/styleCamera';
+import {Text, View, Image, PermissionsAndroid} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
