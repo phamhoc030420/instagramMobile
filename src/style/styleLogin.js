@@ -42,5 +42,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 20,
   },
+  iconLogin: {
+    flexDirection: 'row',
+    marginTop: 20,
+  },
 });
 export default styles;
