@@ -16,25 +16,17 @@ import {
   Pressable,
   TextInput,
 } from 'react-native';
+import Slick from 'react-native-slick';
+import RightHome from './rightHome';
 const Instagram = () => {
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [comment, setComment] = useState('');
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/albums/1/photos')
+    fetch('https://64677693ba7110b663b98c03.mockapi.io/api/Instagram/users')
       .then(response => response.json())
       .then(json => setData(json));
   }, []);
-  const handleSearch = name => {
-    Alert.alert(`${name} Title`, 'My Alert Msg', [
-      {
-        text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
-        style: 'cancel',
-      },
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
-    ]);
-  };
   const handleHeart = () => {};
   const handleComment = () => {
     setShowModal(true);
@@ -46,9 +38,9 @@ const Instagram = () => {
           <Text style={styles.nameHeader}>Instagram</Text>
         </View>
         <View style={styles.headerIcon}>
-          <FontAwesome style={styles.add} name={'heart-o'} size={20} />
-          <AntDesign style={styles.add} name={'search1'} size={20} />
-          <Feather style={styles.add} name={'send'} size={20} />
+          <FontAwesome style={styles.add} name={'heart-o'} size={25} />
+          <AntDesign style={styles.add} name={'search1'} size={25} />
+          <Feather style={styles.add} name={'send'} size={25} />
         </View>
       </View>
       <View style={styles.banner}>
@@ -60,14 +52,16 @@ const Instagram = () => {
             renderItem={({item}) => {
               return (
                 <>
-                  <View style={styles.itemBanner}>
-                    <Image
-                      style={styles.imageContent}
-                      source={{
-                        uri: item.thumbnailUrl,
-                      }}
-                    />
-                    <Text style={styles.nameBanner}>{item.id}</Text>
+                  <View style={styles.homeBanner}>
+                    <View style={styles.itemBanner}>
+                      <Image
+                        style={styles.imageContent}
+                        source={{
+                          uri: item.avatar,
+                        }}
+                      />
+                    </View>
+                    <Text style={styles.nameBanner}>{item.name}</Text>
                   </View>
                 </>
               );
@@ -118,10 +112,12 @@ const Instagram = () => {
                             <Image
                               style={styles.imageContents}
                               source={{
-                                uri: item.thumbnailUrl,
+                                uri: item.avatar,
                               }}
                             />
-                            <Text style={styles.titleContent}>{item.id}</Text>
+                            <Text style={styles.titleContent}>
+                              {item.fullName}
+                            </Text>
                           </View>
                           <Text style={styles.dot}>...</Text>
                         </View>
@@ -151,15 +147,14 @@ const Instagram = () => {
                               size={20}
                             />
                           </View>
-                          <MaterialIcons
+                          <FontAwesome
                             style={styles.iconFoters}
-                            name={'label-important-outline'}
-                            size={40}
+                            name={'bookmark-o'}
                           />
                         </View>
                         <View style={{marginHorizontal: 10, marginTop: 20}}>
                           <Text style={{color: 'black'}}>100 lượt thích</Text>
-                          <Text>{item.title}</Text>
+                          <Text>{item.comment}</Text>
                           <Text>Xem tất cả bình luận</Text>
                         </View>
                         <Text style={styles.like}>Like and Share</Text>
@@ -171,38 +166,6 @@ const Instagram = () => {
             </SafeAreaView>
           </View>
         </SafeAreaView>
-      </View>
-      <View style={styles.footer}>
-        <Foundation
-          onPress={() => handleSearch('Home')}
-          style={styles.iconFooter}
-          name={'home'}
-          size={30}
-        />
-        <Feather
-          onPress={() => handleSearch('Search')}
-          style={styles.iconFooter}
-          name={'search'}
-          size={30}
-        />
-        <AntDesign
-          onPress={() => handleSearch('Instagram')}
-          style={styles.iconFooter}
-          name={'instagram'}
-          size={30}
-        />
-        <AntDesign
-          onPress={() => handleSearch('Heart')}
-          style={styles.iconFooter}
-          name={'heart'}
-          size={30}
-        />
-        <AntDesign
-          onPress={() => handleSearch('User')}
-          style={styles.iconFooter}
-          name={'user'}
-          size={30}
-        />
       </View>
     </View>
   );
