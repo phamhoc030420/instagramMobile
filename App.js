@@ -18,6 +18,7 @@ import User from './src/component/user';
 import Search from './src/component/search';
 import Camera from './src/component/camera';
 import {MenuProvider} from 'react-native-popup-menu';
+import Video from './src/component/video';
 const Tab = createBottomTabNavigator();
 const App = () => {
   return (
@@ -36,7 +37,7 @@ const App = () => {
                   <Foundation
                     style={{color: 'black'}}
                     name={'home'}
-                    size={30}
+                    size={28}
                   />
                 ),
               }}
@@ -46,7 +47,7 @@ const App = () => {
               component={Search}
               options={{
                 tabBarIcon: ({focus}) => (
-                  <Feather style={{color: 'black'}} name={'search'} size={30} />
+                  <Feather style={{color: 'black'}} name={'search'} size={28} />
                 ),
               }}
             />
@@ -58,20 +59,20 @@ const App = () => {
                   <AntDesign
                     style={{color: 'black'}}
                     name={'instagram'}
-                    size={30}
+                    size={28}
                   />
                 ),
               }}
             />
             <Tab.Screen
               name="Video"
-              component={Instagram}
+              component={Video}
               options={{
                 tabBarIcon: ({focus}) => (
                   <MaterialCommunityIcons
                     style={{color: 'black'}}
                     name={'movie-outline'}
-                    size={30}
+                    size={28}
                   />
                 ),
               }}
@@ -82,7 +83,7 @@ const App = () => {
               options={{
                 tabBarIcon: ({focus}) => (
                   <Image
-                    style={{width: 30, height: 30, borderRadius: 100}}
+                    style={{width: 28, height: 28, borderRadius: 100}}
                     source={{
                       uri: 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Ros%C3%A9_at_a_fan_signing_event_on_September_25%2C_2022_%28cropped%29.jpg',
                     }}

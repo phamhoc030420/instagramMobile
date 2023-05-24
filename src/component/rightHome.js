@@ -8,28 +8,44 @@ import styles from '../style/styleSearch';
 import {Text, View, Image, Button, TextInput} from 'react-native';
 const RightHome = ({navigation}) => {
   return (
-    <View style={styles.containers}>
-      <View style={styles.rightHomeHeader}>
-        <Ionicons
-          style={styles.colorIcon}
-          name={'arrow-back'}
-          size={30}
-          onPress={() => navigation.navigate('Home')}
-        />
-        <Text style={[styles.colorIcon, styles.nameUser]}>User123</Text>
-        <AntDesign style={styles.colorIcon} name={'videocamera'} size={25} />
-        <FontAwesome
-          style={styles.colorIcon}
-          name={'pencil-square-o'}
-          size={25}
-        />
+    <View style={{backgroundColor: 'white', height: '100%'}}>
+      <View style={styles.rightHomeHeaderRight}>
+        <View style={styles.rightHomeIconFirst}>
+          <Ionicons
+            style={styles.colorIcon}
+            name={'arrow-back'}
+            size={30}
+            onPress={() => navigation.navigate('Home')}
+          />
+          <Text style={[styles.colorIcon, styles.nameUser]}>user123</Text>
+          <Feather style={styles.selectUserRight} name={'chevron-down'} />
+        </View>
+        <View style={styles.rightHomeIconFirst}>
+          <AntDesign
+            style={[styles.colorIcon, styles.Icon]}
+            name={'videocamera'}
+            size={25}
+          />
+          <FontAwesome
+            style={styles.colorIcon}
+            name={'pencil-square-o'}
+            size={25}
+          />
+        </View>
       </View>
-      <TextInput
-        underlineColorAndroid="transparent"
-        placeholder="Tìm Kiếm"
-        placeholderTextColor="#000"
-        autoCapitalize="none"
-        style={styles.searchInput}></TextInput>
+      <View style={styles.containerSearchUser}>
+        <AntDesign
+          style={[styles.colorIcon, styles.SearchIcon]}
+          name={'search1'}
+          size={20}
+        />
+        <TextInput
+          underlineColorAndroid="transparent"
+          placeholder="Tìm Kiếm"
+          placeholderTextColor="#000"
+          autoCapitalize="none"
+          style={styles.searchInput}></TextInput>
+      </View>
       <View style={styles.rightImg}>
         <Image
           style={styles.userContentImg}
@@ -37,11 +53,13 @@ const RightHome = ({navigation}) => {
             uri: 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Ros%C3%A9_at_a_fan_signing_event_on_September_25%2C_2022_%28cropped%29.jpg',
           }}
         />
-        <Text style={styles.userText}>Viết ghi chú</Text>
+        <Text style={styles.userText}>Ghi chú của bạn</Text>
       </View>
       <View style={styles.rightText}>
-        <Text style={styles.colorIcon}>Tin nhắn</Text>
-        <Text style={styles.colorIcons}>Tin nhắn đang chờ</Text>
+        <Text style={[styles.colorIcon, styles.textRight]}>Tin nhắn</Text>
+        <Text style={[styles.colorIcons, styles.textRight]}>
+          Tin nhắn đang chờ
+        </Text>
       </View>
       <View style={styles.rightFooter}>
         <Text style={[styles.colorIcon, styles.rightText1]}>

@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   iconFoters: {
     color: 'black',
     marginRight: 20,
-    fontSize: 20,
+    fontSize: 25,
     marginTop: 8,
   },
   totalImg: {
@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
   },
   headerIcon: {
     flexDirection: 'row',
-    marginHorizontal: 10,
     alignItems: 'center',
   },
   homeBanner: {
@@ -139,9 +138,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   header: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -149,9 +149,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   nameHeader: {
-    fontFamily: 'DancingScript-Bold',
-    color: 'black',
-    fontSize: 30,
+    // fontFamily: 'DancingScript-Bold',
+    // color: 'black',
+    // fontSize: 30,
+    width: 130,
+    height: '100%',
   },
   banner: {
     borderBottomWidth: 0.2,
