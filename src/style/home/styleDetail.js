@@ -44,5 +44,9 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 16,
   },
+  tabBar: {
+    position: 'absolute',
+    bottom: 0,
+  },
 });
 export default styles;

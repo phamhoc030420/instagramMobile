@@ -95,5 +95,66 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 16,
   },
+  uploadTitle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
+  text1: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  text2: {
+    color: 'blue',
+    fontSize: 20,
+  },
+  imgupload: {
+    width: 80,
+    height: 80,
+  },
+  uploadContent: {
+    marginTop: 50,
+    paddingHorizontal: 20,
+  },
+  textContentFirst: {
+    borderTopWidth: 0.6,
+    borderTopColor: '#E9EBEC',
+    paddingTop: 15,
+  },
+  textContent: {
+    paddingBottom: 15,
+    color: 'black',
+    fontSize: 18,
+    borderBottomWidth: 0.6,
+    borderBottomColor: '#E9EBEC',
+    marginBottom: 15,
+  },
+  infopost: {flexDirection: 'row', alignItems: 'center', marginBottom: 20},
+  input: {
+    marginLeft: 20,
+    height: 50,
+    width: '100%',
+  },
+  textContentface: {
+    color: 'black',
+    fontSize: 18,
+  },
+  textLast: {
+    color: 'black',
+    fontSize: 18,
+  },
+  face: {
+    marginBottom: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  last: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });
 export default styles;

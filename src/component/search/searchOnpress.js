@@ -3,6 +3,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from '../../style/search/styleSearch';
 import {Text, View, Image, Button, TextInput} from 'react-native';
+import FastImage from 'react-native-fast-image';
 const SearchOnPress = ({navigation}) => {
   const data = [
     {
@@ -35,7 +36,12 @@ const SearchOnPress = ({navigation}) => {
           return (
             <View key={item.id} style={styles.itemSearch}>
               <View style={styles.leftSearch}>
-                <Image style={styles.imageSearch} source={item.image} />
+                {/* <Image style={styles.imageSearch} source={item.image} /> */}
+                <FastImage
+                  style={styles.imageSearch}
+                  source={item.image}
+                  resizeMode={FastImage.resizeMode.cover}
+                />
                 <View style={styles.textSearh}>
                   <Text style={styles.textSearh1}>{item.tk}</Text>
                   <Text>{item.name}</Text>

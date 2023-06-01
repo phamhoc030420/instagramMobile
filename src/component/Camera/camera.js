@@ -1,6 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import styles from '../../style/camera/styleCamera';
-import {Text, View, Image, PermissionsAndroid} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  PermissionsAndroid,
+  Alert,
+  Linking,
+  Platform,
+  ToastAndroid,
+} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
@@ -10,7 +19,10 @@ import {
   MenuOption,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 const Camera = ({navigation}) => {
+  const insets = useSafeAreaInsets();
+  const [hasPermission, setHasPermission] = useState(false);
   const [cameraPhoto, serCameraPhoto] = useState();
   let options = {
     saveToPhotos: true,
@@ -22,15 +34,82 @@ const Camera = ({navigation}) => {
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
       const result = await launchCamera(options);
-      serCameraPhoto(result.assets[0].uri);
+      if (result.assets !== undefined) {
+        serCameraPhoto(result.assets[0].uri);
+      }
+      return;
+    }
+    if (granted === PermissionsAndroid.RESULTS.DENIED) {
+      console.log('camera denied', granted);
+    } else {
+      showPermissionDeniedAlert();
     }
   };
   const handleOpenImage = async () => {
-    const results = await launchImageLibrary(options);
-    serCameraPhoto(results.assets[0].uri);
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      const results = await launchImageLibrary(options);
+      if (results.assets !== undefined) {
+        serCameraPhoto(results.assets[0].uri);
+      }
+
+      return;
+    }
+    if (granted === PermissionsAndroid.RESULTS.DENIED) {
+      console.log('photo app denied', granted);
+    } else {
+      showPermissionDeniedAlert();
+    }
+  };
+  const showPermissionDeniedAlert = () => {
+    Alert.alert(
+      'Permission Denied',
+      'Open Settings and allow.',
+      [
+        {
+          text: 'Open Settings',
+          onPress: () => openAppSettings(),
+        },
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+  const openAppSettings = () => {
+    try {
+      if (Platform.OS === 'ios') {
+        Linking.openURL('app-settings:');
+      } else {
+        Linking.openSettings();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleUpload = () => {
+    if (cameraPhoto === undefined) {
+      ToastAndroid.show('Choose Image!', ToastAndroid.SHORT);
+      return;
+    }
+    navigation.navigate('Upload', cameraPhoto);
+    serCameraPhoto(undefined);
   };
   return (
-    <View style={styles.cameraContainer}>
+    <View
+      style={[
+        styles.cameraContainer,
+        {
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
+        },
+      ]}>
       <View style={styles.cameraHeader}>
         <View style={styles.cameraFirst}>
           <Feather
@@ -40,7 +119,12 @@ const Camera = ({navigation}) => {
           />
           <Text style={styles.cameraTextHeader}>Bài viết mới</Text>
         </View>
-        <AntDesign style={{color: '#47B0D5'}} name={'arrowright'} size={28} />
+        <AntDesign
+          style={{color: '#47B0D5'}}
+          name={'arrowright'}
+          size={28}
+          onPress={handleUpload}
+        />
       </View>
       {cameraPhoto === undefined ? (
         <View style={styles.cameraContent}>

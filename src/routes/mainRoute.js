@@ -5,6 +5,8 @@ import {Image, View} from 'react-native';
 import Foundation from 'react-native-vector-icons/Foundation';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {MenuProvider} from 'react-native-popup-menu';
 const Tab = createBottomTabNavigator();
@@ -27,8 +29,12 @@ const MainRoute = () => {
           component={Instagram}
           options={{
             tabBarShowLabel: false,
-            tabBarIcon: ({focus}) => (
-              <Foundation style={{color: 'black'}} name={'home'} size={28} />
+            tabBarIcon: ({focused}) => (
+              <Ionicons
+                name={focused ? 'home' : 'home-outline'}
+                size={30}
+                color="black"
+              />
             ),
           }}
         />
@@ -37,8 +43,12 @@ const MainRoute = () => {
           component={Search}
           options={{
             tabBarShowLabel: false,
-            tabBarIcon: ({focus}) => (
-              <Feather style={{color: 'black'}} name={'search'} size={28} />
+            tabBarIcon: ({focused}) => (
+              <Ionicons
+                name={focused ? 'search' : 'search-outline'}
+                size={30}
+                color="black"
+              />
             ),
           }}
         />
@@ -47,11 +57,11 @@ const MainRoute = () => {
           component={Camera}
           options={{
             tabBarShowLabel: false,
-            tabBarIcon: ({focus}) => (
+            tabBarIcon: ({focused}) => (
               <AntDesign
-                style={{color: 'black'}}
-                name={'instagram'}
-                size={28}
+                name={focused ? 'plussquare' : 'plussquareo'}
+                size={30}
+                color="black"
               />
             ),
           }}
@@ -61,11 +71,11 @@ const MainRoute = () => {
           component={Video}
           options={{
             tabBarShowLabel: false,
-            tabBarIcon: ({focus}) => (
+            tabBarIcon: ({focused}) => (
               <MaterialCommunityIcons
-                style={{color: 'black'}}
-                name={'movie-outline'}
-                size={28}
+                size={30}
+                color="black"
+                name={focused ? 'movie' : 'movie-outline'}
               />
             ),
           }}
@@ -75,9 +85,15 @@ const MainRoute = () => {
           component={User}
           options={{
             tabBarShowLabel: false,
-            tabBarIcon: ({focus}) => (
+            tabBarIcon: ({focused}) => (
               <Image
-                style={{width: 28, height: 28, borderRadius: 100}}
+                style={{
+                  width: 30,
+                  height: 30,
+                  borderRadius: 100,
+                  borderWidth: focused ? 1 : null,
+                  borderColor: focused ? 'black' : null,
+                }}
                 source={{
                   uri: 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Ros%C3%A9_at_a_fan_signing_event_on_September_25%2C_2022_%28cropped%29.jpg',
                 }}

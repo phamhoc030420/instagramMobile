@@ -4,9 +4,11 @@ import {Text, View, TextInput, ToastAndroid, StatusBar} from 'react-native';
 import {authentication} from '../../../firebase/firebase-config';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const Register = ({navigation}) => {
+  const insets = useSafeAreaInsets();
+
   const [email, setEmail] = useState('');
   const [passWord, setPassWord] = useState('');
   const [isSign, setIsSign] = useState(false);
@@ -27,21 +29,30 @@ const Register = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="light-content" backgroundColor="black" />
-      <View style={styles.loginContainer}>
+      <View
+        style={[
+          styles.loginContainer,
+          {
+            paddingTop: insets.top,
+            paddingBottom: insets.bottom,
+            paddingLeft: insets.left,
+            paddingRight: insets.right,
+          },
+        ]}>
         <Text style={styles.loginSignIn}>Register </Text>
         <TextInput
           value={email}
           onChangeText={e => setEmail(e)}
           style={styles.loginText1}
           placeholder="Email"
-          placeholderTextColor={'white'}></TextInput>
+          placeholderTextColor={'#8A8B8D'}></TextInput>
         <TextInput
           secureTextEntry={true}
           value={passWord}
           onChangeText={e => setPassWord(e)}
           style={styles.loginText1}
           placeholder="Passsword"
-          placeholderTextColor={'white'}></TextInput>
+          placeholderTextColor={'#8A8B8D'}></TextInput>
         <View onTouchStart={handleRegister} style={styles.loginButton}>
           <Text style={styles.loginButtonText}>Register</Text>
         </View>

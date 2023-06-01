@@ -6,13 +6,30 @@ import styles from '../../style/search/styleSearch';
 import {Text, View, Image, Button, TextInput, Dimensions} from 'react-native';
 import SearchOnPress from './searchOnpress';
 import SearchImage from './searchImage';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Search = ({navigation}) => {
   const [changeContent, setChangeContent] = useState(false);
   const windowWidth = Dimensions.get('window').width;
+  const insets = useSafeAreaInsets();
+  const kq = async () => {
+    await AsyncStorage.getItem('mode').then(value => {
+      console.log('value', value);
+    });
+  };
+  kq();
   return (
     <SafeAreaView style={{flex: 1}}>
-      <View style={styles.containerSearch}>
+      <View
+        style={[
+          styles.containerSearch,
+          {
+            paddingTop: insets.top,
+            paddingBottom: insets.bottom,
+            paddingLeft: insets.left,
+            paddingRight: insets.right,
+          },
+        ]}>
         <View style={changeContent ? styles.searchBack : {}}>
           <AntDesign
             style={[

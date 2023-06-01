@@ -150,5 +150,36 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 15,
   },
+  modalPopup: {
+    justifyContent: 'flex-end',
+    width: '100%',
+    marginLeft: 0,
+    marginBottom: 0,
+  },
+  popupItem: {
+    backgroundColor: 'white',
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    position: 'relative',
+  },
+  itembottom: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  textItem: {
+    marginLeft: 20,
+    color: 'black',
+    fontSize: 16,
+  },
+  scrollModal: {
+    position: 'absolute',
+
+    width: 30,
+    borderBottomWidth: 5,
+    borderRadius: 10,
+    marginTop: 5,
+    left: '50%',
+  },
 });
 export default styles;
