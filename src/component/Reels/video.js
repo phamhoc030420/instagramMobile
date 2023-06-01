@@ -11,9 +11,11 @@ import {
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import ReelsComponent from './ReelsComponent';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const Video = ({navigation}) => {
+  const insets = useSafeAreaInsets();
+
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
@@ -26,6 +28,10 @@ const Video = ({navigation}) => {
           backgroundColor: 'white',
           position: 'relative',
           backgroundColor: 'black',
+          paddingTop: insets.top,
+          paddingBottom: insets.bottom,
+          paddingLeft: insets.left,
+          paddingRight: insets.right,
         }}>
         <View
           style={{

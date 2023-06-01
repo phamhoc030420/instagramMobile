@@ -1,4 +1,7 @@
 import {StyleSheet} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const primaryColor = AsyncStorage.getItem('mode');
+console.log(primaryColor);
 const styles = StyleSheet.create({
   userHeader: {
     flexDirection: 'row',
@@ -150,6 +153,17 @@ const styles = StyleSheet.create({
   accLeft: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  mode: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 50,
+    alignItems: 'center',
+  },
+  textMode: {
+    fontSize: 20,
+    color: 'black',
+    marginRight: 20,
   },
 });
 export default styles;

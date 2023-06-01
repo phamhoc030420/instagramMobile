@@ -3,20 +3,32 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import styles from '../../style/home/styleDetail';
 import {View, Text, Image, StatusBar} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import TabBar from '../tab/tabBar';
 const Stack = createNativeStackNavigator();
-const Detail = ({route, navigation}) => {
-  const {avatar, comment, fullName, thumbnailUrl} = route.params;
+const Detail = ({route, navigation: {goBack}}) => {
+  const {url, title, albumId, thumbnailUrl} = route.params;
+  const insets = useSafeAreaInsets();
+
   return (
     <>
       <SafeAreaView style={{flex: 1}}>
-        <View style={styles.detailContainer}>
+        <View
+          style={[
+            styles.detailContainer,
+            {
+              paddingTop: insets.top,
+              paddingBottom: insets.bottom,
+              paddingLeft: insets.left,
+              paddingRight: insets.right,
+            },
+          ]}>
           <View style={styles.backDetail}>
             <Ionicons
               style={{color: 'black'}}
               name={'arrow-back'}
               size={30}
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => goBack()}
             />
             <Text style={styles.detailHome}>Home</Text>
           </View>
@@ -24,10 +36,10 @@ const Detail = ({route, navigation}) => {
             <Image
               style={styles.imageAvarta}
               source={{
-                uri: avatar,
+                uri: url,
               }}
             />
-            <Text>{fullName}</Text>
+            <Text>{albumId}</Text>
           </View>
           <Image
             style={styles.imageMainAvarta}
@@ -35,8 +47,11 @@ const Detail = ({route, navigation}) => {
               uri: thumbnailUrl,
             }}
           />
-          <Text style={styles.tagComment}>Bình Luận </Text>
-          <Text style={styles.comment}>{comment}</Text>
+          <Text style={styles.tagurl}>Bình Luận </Text>
+          <Text style={styles.comment}>{title}</Text>
+          <View style={styles.tabBar}>
+            <TabBar active={'home'} />
+          </View>
         </View>
       </SafeAreaView>
     </>

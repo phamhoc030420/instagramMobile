@@ -1,31 +1,55 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import styles from '../../style/authentication/styleLogin';
-import {Text, View, TextInput, ToastAndroid, StatusBar} from 'react-native';
+import {
+  Text,
+  View,
+  TextInput,
+  ToastAndroid,
+  StatusBar,
+  Button,
+} from 'react-native';
 import {authentication} from '../../../firebase/firebase-config';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {SafeAreaView} from 'react-native-safe-area-context';
-
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {ThemeContext} from '../../../App';
 const Login = ({navigation}) => {
+  const {setIdToken, setUserRole, authenticate} = useContext(ThemeContext);
   const [email, setEmail] = useState('');
   const [passWord, setPassWord] = useState('');
-  const handleLogIn = () => {
+  const insets = useSafeAreaInsets();
+  const recaptcha = useRef();
+  const handleLogIn = async () => {
+    // navigation.navigate('MainRoute');
     if (!email === true || !passWord === true) {
       ToastAndroid.show('Please enter !', ToastAndroid.SHORT);
       return;
     }
     signInWithEmailAndPassword(authentication, email, passWord)
       .then(userCredential => {
-        // Signed in
+        // // Signed in
         const user = userCredential.user;
-        ToastAndroid.show('Login success !', ToastAndroid.SHORT);
-        setEmail('');
-        setPassWord('');
-        navigation.navigate('MainRoute');
+        user
+          .getIdToken()
+          .then(async idToken => {
+            // console.log('ID token:', idToken);
+            setIdToken(idToken);
+            if (email === 'hoc@gmail.com') {
+              setUserRole('admin');
+            } else {
+              setUserRole('user');
+            }
+            await authenticate(idToken);
+            ToastAndroid.show('Login success !', ToastAndroid.SHORT);
+            setEmail('');
+            setPassWord('');
+            navigation.navigate('MainRoute');
+          })
+          .catch(error => {
+            console.log('Lỗi khi lấy ID token:', error);
+          });
       })
       .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
         setEmail('');
         setPassWord('');
         ToastAndroid.show('Wrong account or password !', ToastAndroid.SHORT);
@@ -34,21 +58,30 @@ const Login = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="light-content" backgroundColor="black" />
-      <View style={styles.loginContainer}>
+      <View
+        style={[
+          styles.loginContainer,
+          {
+            paddingTop: insets.top,
+            paddingBottom: insets.bottom,
+            paddingLeft: insets.left,
+            paddingRight: insets.right,
+          },
+        ]}>
         <Text style={styles.loginSignIn}>Sign In </Text>
         <TextInput
           value={email}
           onChangeText={e => setEmail(e)}
           style={styles.loginText1}
           placeholder="Email"
-          placeholderTextColor={'white'}></TextInput>
+          placeholderTextColor={'#8A8B8D'}></TextInput>
         <TextInput
           secureTextEntry={true}
           value={passWord}
           onChangeText={e => setPassWord(e)}
           style={styles.loginText1}
           placeholder="Passsword"
-          placeholderTextColor={'white'}></TextInput>
+          placeholderTextColor={'#8A8B8D'}></TextInput>
         <View onTouchStart={handleLogIn} style={styles.loginButton}>
           <Text style={styles.loginButtonText}>Log In</Text>
         </View>

@@ -12,28 +12,30 @@ import {PermissionsAndroid, BackHandler} from 'react-native';
 import AutheRoute from './src/routes/authenRoute';
 import RNBootSplash from 'react-native-bootsplash';
 export const ThemeContext = createContext();
+import * as Keychain from 'react-native-keychain';
+
 const App = () => {
   const [datas, setDatas] = useState([]);
+  const [idToken, setIdToken] = useState('');
+  const [userRole, setUserRole] = useState('');
+  const [token, setToken] = useState('');
+
   useEffect(() => {
     const init = async () => {
       //permission
       try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.CAMERA,
-          {
-            title: 'Cool Photo App Camera Permission',
-            message:
-              'Cool Photo App needs access to your camera ' +
-              'so you can take awesome pictures.',
-            buttonNeutral: 'Ask Me Later',
-            buttonNegative: 'Cancel',
-            buttonPositive: 'OK',
-          },
+        const checkGranted = await PermissionsAndroid.check(
+          PermissionsAndroid.PERMISSIONS.GET_ACCOUNTS,
         );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('You can use the camera');
-        } else {
-          BackHandler.exitApp();
+        if (!checkGranted) {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.GET_ACCOUNTS,
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            console.log('You can use the GET ACCOUNTS');
+          } else {
+            BackHandler.exitApp();
+          }
         }
       } catch (err) {
         console.warn(err);
@@ -57,8 +59,55 @@ const App = () => {
       console.log('BootSplash has been hidden successfully');
     });
   }, []);
+  //save token
+  const authenticate = async newToken => {
+    try {
+      await Keychain.setGenericPassword('token', newToken);
+      setToken(newToken);
+    } catch (error) {
+      console.log('Lỗi khi lưu token vào Keychain:', error);
+    }
+  };
+  //token
+  useEffect(() => {
+    const readValue = async () => {
+      try {
+        const credentials = await Keychain.getGenericPassword();
+        if (credentials) {
+          const token = credentials.password;
+          setToken(token);
+          console.log('Giá trị đã được đọc:', token);
+        } else {
+          console.log('Không tìm thấy giá trị');
+        }
+      } catch (error) {
+        console.log('Lỗi khi đọc giá trị:', error);
+      }
+    };
+    readValue();
+  }, []);
+  //remove
+  const removeValue = async () => {
+    try {
+      await Keychain.resetGenericPassword();
+      setToken('');
+      console.log('Giá trị đã được xóa thành công!');
+    } catch (error) {
+      console.log('Lỗi khi xóa giá trị:', error);
+    }
+  };
   return (
-    <ThemeContext.Provider value={datas}>
+    <ThemeContext.Provider
+      value={{
+        datas,
+        idToken,
+        setIdToken,
+        userRole,
+        setUserRole,
+        token,
+        authenticate,
+        removeValue,
+      }}>
       <AutheRoute />
     </ThemeContext.Provider>
   );

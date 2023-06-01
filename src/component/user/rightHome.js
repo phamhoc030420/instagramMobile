@@ -6,10 +6,27 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../../style/search/styleSearch';
 import {Text, View, Image, Button, TextInput} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-const RightHome = ({navigation}) => {
+import Modal from 'react-native-modal';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import {dataPopUp} from './dataBottomPopUp';
+const RightHome = ({navigation: {goBack}}) => {
+  const insets = useSafeAreaInsets();
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView
+      style={{
+        height: '100%',
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+        paddingLeft: insets.left,
+        paddingRight: insets.right,
+      }}>
       <View style={{backgroundColor: 'white', height: '100%'}}>
         <View style={styles.rightHomeHeaderRight}>
           <View style={styles.rightHomeIconFirst}>
@@ -17,7 +34,7 @@ const RightHome = ({navigation}) => {
               style={styles.colorIcon}
               name={'arrow-back'}
               size={30}
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => goBack()}
             />
             <Text style={[styles.colorIcon, styles.nameUser]}>user123</Text>
             <Feather style={styles.selectUserRight} name={'chevron-down'} />
@@ -29,12 +46,42 @@ const RightHome = ({navigation}) => {
               size={25}
             />
             <FontAwesome
+              onPress={toggleModal}
               style={styles.colorIcon}
               name={'pencil-square-o'}
               size={25}
             />
           </View>
         </View>
+        <Modal
+          onBackdropPress={() => setModalVisible(false)}
+          onBackButtonPress={() => setModalVisible(false)}
+          isVisible={isModalVisible}
+          swipeDirection="down"
+          onSwipeComplete={toggleModal}
+          animationIn="bounceInUp"
+          animationOut="bounceOutDown"
+          animationInTiming={900}
+          animationOutTiming={500}
+          backdropTransitionInTiming={1000}
+          backdropTransitionOutTiming={500}
+          backdropOpacity={0.7}
+          height={200}
+          style={styles.modalPopup}>
+          <View style={styles.popupItem}>
+            <View style={styles.scrollModal}></View>
+            {dataPopUp.map((item, index) => (
+              <View style={styles.itembottom} key={index}>
+                <Ionicons
+                  style={{color: 'black'}}
+                  name={`${item.icon}`}
+                  size={28}
+                />
+                <Text style={styles.textItem}>{item.text}</Text>
+              </View>
+            ))}
+          </View>
+        </Modal>
         <View style={styles.containerSearchUser}>
           <AntDesign
             style={[styles.colorIcon, styles.SearchIcon]}

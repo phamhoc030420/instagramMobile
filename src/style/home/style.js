@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
   },
   add: {
     paddingLeft: 10,
-    color: 'black',
     paddingRight: 10,
   },
   headerIcon: {
@@ -146,23 +145,44 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     textAlign: 'center',
-    paddingVertical: 10,
+    zIndex: 100,
   },
   nameHeader: {
-    // fontFamily: 'DancingScript-Bold',
-    // color: 'black',
-    // fontSize: 30,
-    width: 130,
-    height: '100%',
+    width: 180,
+    height: '60%',
   },
   banner: {
+    paddingBottom: 10,
     borderBottomWidth: 0.2,
     flex: 2,
     flexDirection: 'row',
-    paddingTop: 30,
+    // paddingTop: 30,
   },
   content: {
     flex: 10,
+  },
+  menuHome: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 100,
+  },
+  menuAlert: {
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+  },
+  text1: {
+    color: 'black',
+    fontSize: 18,
+  },
+  text2: {
+    color: 'black',
+  },
+  menutext: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  loading: {
+    top: '50%',
   },
 });
 export default styles;
