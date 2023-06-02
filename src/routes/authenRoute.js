@@ -12,6 +12,7 @@ import Notify from '../component/home/notify';
 import Map from '../component/Map/map';
 import Comment from '../component/home/comment';
 import * as Keychain from 'react-native-keychain';
+import ForgotPassword from '../component/Authentication/forgotPassword';
 const Stack = createNativeStackNavigator();
 const AutheRoute = () => {
   const {userRole, token} = useContext(ThemeContext);
@@ -35,6 +36,7 @@ const AutheRoute = () => {
           <Stack.Group>
             <Stack.Screen name="Authentication" component={Login} />
             <Stack.Screen name="register" component={Register} />
+            <Stack.Screen name="Forgot" component={ForgotPassword} />
           </Stack.Group>
         )}
       </Stack.Navigator>

@@ -8,20 +8,27 @@
 import React, {useEffect, useState, createContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
-import {PermissionsAndroid, BackHandler} from 'react-native';
+import {
+  PermissionsAndroid,
+  BackHandler,
+  Alert,
+  ToastAndroid,
+} from 'react-native';
 import AutheRoute from './src/routes/authenRoute';
 import RNBootSplash from 'react-native-bootsplash';
 export const ThemeContext = createContext();
 import * as Keychain from 'react-native-keychain';
-
+import {async} from '@firebase/util';
+import LocalAuthentication from 'rn-local-authentication';
 const App = () => {
   const [datas, setDatas] = useState([]);
   const [idToken, setIdToken] = useState('');
   const [userRole, setUserRole] = useState('');
   const [token, setToken] = useState('');
-
   useEffect(() => {
     const init = async () => {
+      const result = await Keychain.getGenericPassword();
+      setToken(!result ? '' : result.password);
       //permission
       try {
         const checkGranted = await PermissionsAndroid.check(
@@ -52,12 +59,37 @@ const App = () => {
       );
       const data = await response.json();
       setDatas(data);
+      LocalAuthentication.isSupportedAsync()
+        .then(isSecure => {
+          if (isSecure) {
+            console.log('Thiết bị hỗ trợ xác thực local');
+            const handleAuthenticate = async () => {
+              const result = await LocalAuthentication.authenticateAsync({
+                reason: 'Very important reason to authenticate',
+                fallbackEnabled: true,
+                fallbackTitle: 'Enter password',
+                cancelTitle: 'Cancel',
+                fallbackToPinCodeAction: true,
+                reuseDuration: '100',
+                fallbackEnabled: true,
+                fallbackTitle: true,
+                cancelTitle: true,
+              });
+              if (result.success) {
+                await RNBootSplash.hide({fade: true, duration: 10});
+                console.log('BootSplash has been hidden successfully');
+              }
+            };
+            handleAuthenticate();
+          } else {
+            console.log('Thiết bị không hỗ trợ xác thực local');
+          }
+        })
+        .catch(error => {
+          console.log('Lỗi kiểm tra tính khả dụng của xác thực local:', error);
+        });
     };
-
-    init().finally(async () => {
-      await RNBootSplash.hide({fade: true, duration: 10});
-      console.log('BootSplash has been hidden successfully');
-    });
+    init();
   }, []);
   //save token
   const authenticate = async newToken => {
@@ -76,7 +108,6 @@ const App = () => {
         if (credentials) {
           const token = credentials.password;
           setToken(token);
-          console.log('Giá trị đã được đọc:', token);
         } else {
           console.log('Không tìm thấy giá trị');
         }
