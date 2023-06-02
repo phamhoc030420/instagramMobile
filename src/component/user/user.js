@@ -75,7 +75,7 @@ const User = ({navigation}) => {
 
     signOut(authentication)
       .then(async () => {
-        ToastAndroid.show('Logut success !', ToastAndroid.SHORT);
+        ToastAndroid.show('Logout success !', ToastAndroid.SHORT);
         setUserRole('');
         setIdToken('');
         await removeValue();

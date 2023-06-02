@@ -150,6 +150,7 @@ android {
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
+    implementation "androidx.biometric:biometric:1.1.0"
     implementation("com.facebook.react:react-android")
     implementation("androidx.core:core-splashscreen:1.0.0") // add this line
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")

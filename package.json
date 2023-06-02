@@ -30,7 +30,6 @@
     "react-native-image-picker": "^5.3.1",
     "react-native-keychain": "^8.1.1",
     "react-native-lazyload": "^1.1.0",
-    "react-native-local-auth": "^1.7.0",
     "react-native-maps": "^1.7.1",
     "react-native-modal": "^13.0.1",
     "react-native-permissions": "^3.8.0",
@@ -43,7 +42,8 @@
     "react-native-swiper-flatlist": "^3.2.2",
     "react-native-vector-icons": "^9.2.0",
     "react-native-video": "^5.2.1",
-    "react-native-webview": "^12.1.0"
+    "react-native-webview": "^12.1.0",
+    "rn-local-authentication": "^1.2.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -8,8 +8,12 @@ import {
   StatusBar,
   Button,
 } from 'react-native';
-import {authentication} from '../../../firebase/firebase-config';
-import {signInWithEmailAndPassword} from 'firebase/auth';
+import {authentication, provider} from '../../../firebase/firebase-config';
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from 'firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ThemeContext} from '../../../App';
@@ -55,6 +59,14 @@ const Login = ({navigation}) => {
         ToastAndroid.show('Wrong account or password !', ToastAndroid.SHORT);
       });
   };
+  const handleLoginGoogle = () => {
+    // let provider = new GoogleAuthProvider();
+    signInWithPopup(authentication, provider)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(e => console.log(e));
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="light-content" backgroundColor="black" />
@@ -90,11 +102,16 @@ const Login = ({navigation}) => {
           <Text
             style={styles.forgot}
             onPress={() => navigation.navigate('register')}>
-            Register Account{' '}
+            Register Account
           </Text>
         </View>
+
+        <Text onPress={() => navigation.navigate('Forgot')} style={styles.cant}>
+          Forgot Password
+        </Text>
         <View style={styles.iconLogin}>
           <AntDesign
+            onPress={handleLoginGoogle}
             style={{color: 'white', marginRight: 10}}
             name={'googleplus'}
             size={28}

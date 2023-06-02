@@ -4,6 +4,8 @@ import Feather from 'react-native-vector-icons/Feather';
 import styles from '../../style/home/style';
 import FastImage from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {signOut} from 'firebase/auth';
+import {authentication} from '../../../firebase/firebase-config';
 import {
   Menu,
   MenuOptions,
@@ -25,10 +27,11 @@ import {
   ScrollView,
   ActivityIndicator,
   Animated,
+  ToastAndroid,
 } from 'react-native';
 import Detail from './detail';
 import {ThemeContext} from '../../../App';
-
+import LocalAuthentication from 'rn-local-authentication';
 const Instagram = ({route, navigation}) => {
   const result = route.params;
   const [isloading, setIsLoading] = useState(false);
@@ -47,8 +50,8 @@ const Instagram = ({route, navigation}) => {
   const [active, setActive] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectedComment, setSelectedComment] = useState([]);
-  const {datas} = useContext(ThemeContext);
-
+  const {datas, token, removeValue, setUserRole, setIdToken} =
+    useContext(ThemeContext);
   useEffect(() => {
     if (result !== undefined) {
       const newData = [result, ...dataAdd];
