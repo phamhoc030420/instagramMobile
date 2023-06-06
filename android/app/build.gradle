@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: 'com.google.gms.google-services'
 apply plugin: "com.facebook.react"
 
 import com.android.build.OutputFile
@@ -155,6 +156,8 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.0") // add this line
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
     implementation project(':react-native-vector-icons')
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+    implementation 'com.google.firebase:firebase-analytics'
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.squareup.okhttp3', module:'okhttp'

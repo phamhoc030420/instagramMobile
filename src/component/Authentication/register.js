@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import styles from '../../style/authentication/styleLogin';
 import {Text, View, TextInput, ToastAndroid, StatusBar} from 'react-native';
-import {authentication} from '../../../firebase/firebase-config';
-import {createUserWithEmailAndPassword} from 'firebase/auth';
+// import {authentication} from '../../../firebase/firebase-config';
+// import {createUserWithEmailAndPassword} from 'firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
-
+import auth from '@react-native-firebase/auth';
 const Register = ({navigation}) => {
   const insets = useSafeAreaInsets();
 
@@ -13,7 +13,8 @@ const Register = ({navigation}) => {
   const [passWord, setPassWord] = useState('');
   const [isSign, setIsSign] = useState(false);
   const handleRegister = () => {
-    createUserWithEmailAndPassword(authentication, email, passWord)
+    auth()
+      .createUserWithEmailAndPassword(email, passWord)
       .then(userCredential => {
         setIsSign(true);
         const user = userCredential.user;

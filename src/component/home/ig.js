@@ -4,8 +4,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import styles from '../../style/home/style';
 import FastImage from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {signOut} from 'firebase/auth';
-import {authentication} from '../../../firebase/firebase-config';
+import messaging from '@react-native-firebase/messaging';
 import {
   Menu,
   MenuOptions,
@@ -53,6 +52,11 @@ const Instagram = ({route, navigation}) => {
   const {datas, token, removeValue, setUserRole, setIdToken} =
     useContext(ThemeContext);
   useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
     if (result !== undefined) {
       const newData = [result, ...dataAdd];
       setDataAdd(newData);
