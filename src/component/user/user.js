@@ -9,20 +9,14 @@ import React, {
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styles from '../../style/users/styleUser';
-import {
-  Text,
-  View,
-  Image,
-  ToastAndroid,
-  Button,
-  StatusBar,
-  Switch,
-} from 'react-native';
+import {Text, View, Image, ToastAndroid, StatusBar, Switch} from 'react-native';
+import {Button, Card} from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RightHome from './rightHome';
 import Slick from 'react-native-slick';
-import {signOut} from 'firebase/auth';
-import {authentication} from '../../../firebase/firebase-config';
+// import {signOut} from 'firebase/auth';
+// import {authentication} from '../../../firebase/firebase-config';
+import auth from '@react-native-firebase/auth';
 import {BottomSheetModalProvider, BottomSheetModal} from '@gorhom/bottom-sheet';
 import 'react-native-gesture-handler';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -73,7 +67,8 @@ const User = ({navigation}) => {
   const handleLogOut = () => {
     setlogOut(true);
 
-    signOut(authentication)
+    auth()
+      .signOut()
       .then(async () => {
         ToastAndroid.show('Logout success !', ToastAndroid.SHORT);
         setUserRole('');
@@ -81,6 +76,7 @@ const User = ({navigation}) => {
         await removeValue();
         navigation.navigate('Authentication');
       })
+
       .catch(error => {});
   };
   return (
@@ -150,14 +146,16 @@ const User = ({navigation}) => {
                 </View>
               </View>
               <View style={styles.userButton}>
-                <View style={styles.userButtonItem} onTouchStart={handleEdit}>
-                  <Text style={styles.userText}>Chỉnh sửa trang cá nhân</Text>
-                </View>
-                <View
-                  onTouchStart={() => navigation.navigate('Map')}
-                  style={styles.userButtonItem}>
-                  <Text style={styles.userText}>Chia sẻ trang cá nhân</Text>
-                </View>
+                <Button
+                  title="Chỉnh sửa trang cá nhân"
+                  type="outline"
+                  onPress={handleEdit}
+                />
+                <Button
+                  onPress={() => navigation.navigate('Slider')}
+                  title="Chia sẻ trang cá nhân"
+                  type="outline"
+                />
               </View>
               <View style={styles.mode}>
                 <Text style={styles.textMode}>Sáng/Tối</Text>

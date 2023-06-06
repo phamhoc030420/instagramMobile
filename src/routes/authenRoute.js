@@ -13,6 +13,7 @@ import Map from '../component/Map/map';
 import Comment from '../component/home/comment';
 import * as Keychain from 'react-native-keychain';
 import ForgotPassword from '../component/Authentication/forgotPassword';
+import SliderStar from '../component/user/slider';
 const Stack = createNativeStackNavigator();
 const AutheRoute = () => {
   const {userRole, token} = useContext(ThemeContext);
@@ -30,7 +31,7 @@ const AutheRoute = () => {
             <Stack.Screen name="Upload" component={Upload} />
             <Stack.Screen name="Notify" component={Notify} />
             <Stack.Screen name="Comment" component={Comment} />
-            <Stack.Screen name="Map" component={Map} />
+            <Stack.Screen name="Slider" component={SliderStar} />
           </Stack.Group>
         ) : (
           <Stack.Group>

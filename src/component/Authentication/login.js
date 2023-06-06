@@ -8,12 +8,7 @@ import {
   StatusBar,
   Button,
 } from 'react-native';
-import {authentication, provider} from '../../../firebase/firebase-config';
-import {
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from 'firebase/auth';
+import auth from '@react-native-firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ThemeContext} from '../../../App';
@@ -29,7 +24,8 @@ const Login = ({navigation}) => {
       ToastAndroid.show('Please enter !', ToastAndroid.SHORT);
       return;
     }
-    signInWithEmailAndPassword(authentication, email, passWord)
+    auth()
+      .signInWithEmailAndPassword(email, passWord)
       .then(userCredential => {
         // // Signed in
         const user = userCredential.user;
@@ -61,11 +57,11 @@ const Login = ({navigation}) => {
   };
   const handleLoginGoogle = () => {
     // let provider = new GoogleAuthProvider();
-    signInWithPopup(authentication, provider)
-      .then(data => {
-        console.log(data);
-      })
-      .catch(e => console.log(e));
+    // signInWithPopup(authentication, provider)
+    //   .then(data => {
+    //     console.log(data);
+    //   })
+    //   .catch(e => console.log(e));
   };
   return (
     <SafeAreaView style={{flex: 1}}>

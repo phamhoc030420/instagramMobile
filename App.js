@@ -18,8 +18,6 @@ import AutheRoute from './src/routes/authenRoute';
 import RNBootSplash from 'react-native-bootsplash';
 export const ThemeContext = createContext();
 import * as Keychain from 'react-native-keychain';
-import {async} from '@firebase/util';
-import LocalAuthentication from 'rn-local-authentication';
 const App = () => {
   const [datas, setDatas] = useState([]);
   const [idToken, setIdToken] = useState('');
@@ -32,14 +30,14 @@ const App = () => {
       //permission
       try {
         const checkGranted = await PermissionsAndroid.check(
-          PermissionsAndroid.PERMISSIONS.GET_ACCOUNTS,
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
         );
         if (!checkGranted) {
           const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.GET_ACCOUNTS,
+            PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
           );
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('You can use the GET ACCOUNTS');
+            console.log('You can use the POST NOTIFICATIONS');
           } else {
             BackHandler.exitApp();
           }
@@ -78,6 +76,8 @@ const App = () => {
               if (result.success) {
                 await RNBootSplash.hide({fade: true, duration: 10});
                 console.log('BootSplash has been hidden successfully');
+              } else {
+                BackHandler.exitApp();
               }
             };
             handleAuthenticate();
@@ -89,6 +89,7 @@ const App = () => {
           console.log('Lỗi kiểm tra tính khả dụng của xác thực local:', error);
         });
     };
+    RNBootSplash.hide({fade: true, duration: 10});
     init();
   }, []);
   //save token
