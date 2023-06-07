@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   textMode: {
     fontSize: 20,
-    color: 'black',
+    // color: 'black',
     marginRight: 20,
   },
 });

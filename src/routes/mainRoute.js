@@ -1,27 +1,26 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React, {useContext, useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Image, View} from 'react-native';
-import Foundation from 'react-native-vector-icons/Foundation';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {MenuProvider} from 'react-native-popup-menu';
 const Tab = createBottomTabNavigator();
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Camera from '../component/Camera/camera';
 import Search from '../component/search/search';
 import Instagram from '../component/home/ig';
 import Video from '../component/Reels/video';
 import User from '../component/user/user';
-const Stack = createNativeStackNavigator();
+import {ThemeContext} from '../../App';
 const MainRoute = () => {
+  const {colorMode, colorText} = useContext(ThemeContext);
   return (
     <MenuProvider>
       <Tab.Navigator
         screenOptions={{
+          tabBarStyle: {
+            backgroundColor: colorMode,
+          },
           headerShown: false,
         }}>
         <Tab.Screen
@@ -33,7 +32,7 @@ const MainRoute = () => {
               <Ionicons
                 name={focused ? 'home' : 'home-outline'}
                 size={30}
-                color="black"
+                color={colorText}
               />
             ),
           }}
@@ -47,7 +46,7 @@ const MainRoute = () => {
               <Ionicons
                 name={focused ? 'search' : 'search-outline'}
                 size={30}
-                color="black"
+                color={colorText}
               />
             ),
           }}
@@ -61,7 +60,7 @@ const MainRoute = () => {
               <AntDesign
                 name={focused ? 'plussquare' : 'plussquareo'}
                 size={30}
-                color="black"
+                color={colorText}
               />
             ),
           }}
@@ -74,7 +73,7 @@ const MainRoute = () => {
             tabBarIcon: ({focused}) => (
               <MaterialCommunityIcons
                 size={30}
-                color="black"
+                color={colorText}
                 name={focused ? 'movie' : 'movie-outline'}
               />
             ),

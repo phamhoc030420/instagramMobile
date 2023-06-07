@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {Text, View, Image, ToastAndroid, Button, StatusBar} from 'react-native';
+import {Text, View, Image, Button, StatusBar} from 'react-native';
 import 'react-native-gesture-handler';
 import MapView from 'react-native-maps';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';

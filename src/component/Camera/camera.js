@@ -8,9 +8,9 @@ import {
   Alert,
   Linking,
   Platform,
-  ToastAndroid,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Toast from 'react-native-toast-message';
 import Feather from 'react-native-vector-icons/Feather';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {
@@ -93,7 +93,13 @@ const Camera = ({navigation}) => {
   };
   const handleUpload = () => {
     if (cameraPhoto === undefined) {
-      ToastAndroid.show('Choose Image!', ToastAndroid.SHORT);
+      Toast.show({
+        type: 'info',
+        text1: 'Title',
+        text2: 'Choose Image',
+        visibilityTime: 2000,
+        autoHide: true,
+      });
       return;
     }
     navigation.navigate('Upload', cameraPhoto);
@@ -169,6 +175,7 @@ const Camera = ({navigation}) => {
           />
         </View>
       </View>
+      <Toast />
     </View>
   );
 };

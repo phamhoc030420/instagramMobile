@@ -8,12 +8,7 @@
 import React, {useEffect, useState, createContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
-import {
-  PermissionsAndroid,
-  BackHandler,
-  Alert,
-  ToastAndroid,
-} from 'react-native';
+import {PermissionsAndroid, BackHandler} from 'react-native';
 import AutheRoute from './src/routes/authenRoute';
 import RNBootSplash from 'react-native-bootsplash';
 export const ThemeContext = createContext();
@@ -23,6 +18,8 @@ const App = () => {
   const [idToken, setIdToken] = useState('');
   const [userRole, setUserRole] = useState('');
   const [token, setToken] = useState('');
+  const [colorMode, setColorMode] = useState('white');
+  const [colorText, setColorText] = useState('black');
   useEffect(() => {
     const init = async () => {
       const result = await Keychain.getGenericPassword();
@@ -57,37 +54,37 @@ const App = () => {
       );
       const data = await response.json();
       setDatas(data);
-      LocalAuthentication.isSupportedAsync()
-        .then(isSecure => {
-          if (isSecure) {
-            console.log('Thiết bị hỗ trợ xác thực local');
-            const handleAuthenticate = async () => {
-              const result = await LocalAuthentication.authenticateAsync({
-                reason: 'Very important reason to authenticate',
-                fallbackEnabled: true,
-                fallbackTitle: 'Enter password',
-                cancelTitle: 'Cancel',
-                fallbackToPinCodeAction: true,
-                reuseDuration: '100',
-                fallbackEnabled: true,
-                fallbackTitle: true,
-                cancelTitle: true,
-              });
-              if (result.success) {
-                await RNBootSplash.hide({fade: true, duration: 10});
-                console.log('BootSplash has been hidden successfully');
-              } else {
-                BackHandler.exitApp();
-              }
-            };
-            handleAuthenticate();
-          } else {
-            console.log('Thiết bị không hỗ trợ xác thực local');
-          }
-        })
-        .catch(error => {
-          console.log('Lỗi kiểm tra tính khả dụng của xác thực local:', error);
-        });
+      // LocalAuthentication.isSupportedAsync()
+      //   .then(isSecure => {
+      //     if (isSecure) {
+      //       console.log('Thiết bị hỗ trợ xác thực local');
+      //       const handleAuthenticate = async () => {
+      //         const result = await LocalAuthentication.authenticateAsync({
+      //           reason: 'Very important reason to authenticate',
+      //           fallbackEnabled: true,
+      //           fallbackTitle: 'Enter password',
+      //           cancelTitle: 'Cancel',
+      //           fallbackToPinCodeAction: true,
+      //           reuseDuration: '100',
+      //           fallbackEnabled: true,
+      //           fallbackTitle: true,
+      //           cancelTitle: true,
+      //         });
+      //         if (result.success) {
+      //           await RNBootSplash.hide({fade: true, duration: 10});
+      //           console.log('BootSplash has been hidden successfully');
+      //         } else {
+      //           BackHandler.exitApp();
+      //         }
+      //       };
+      //       handleAuthenticate();
+      //     } else {
+      //       console.log('Thiết bị không hỗ trợ xác thực local');
+      //     }
+      //   })
+      //   .catch(error => {
+      //     console.log('Lỗi kiểm tra tính khả dụng của xác thực local:', error);
+      //   });
     };
     RNBootSplash.hide({fade: true, duration: 10});
     init();
@@ -139,6 +136,10 @@ const App = () => {
         token,
         authenticate,
         removeValue,
+        colorText,
+        setColorText,
+        colorMode,
+        setColorMode,
       }}>
       <AutheRoute />
     </ThemeContext.Provider>
