@@ -48,6 +48,7 @@ const Search = ({navigation}) => {
             />
           ) : null}
           <TextInput
+            keyboardType="numeric"
             underlineColorAndroid="transparent"
             placeholder="Tìm Kiếm"
             placeholderTextColor="#8f8787"
