@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from '../../style/authentication/styleLogin';
-import {Text, View, TextInput, ToastAndroid, StatusBar} from 'react-native';
+import {Text, View, TextInput, StatusBar} from 'react-native';
+import Toast from 'react-native-toast-message';
 import auth from '@react-native-firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -13,7 +14,13 @@ const ForgotPassword = ({navigation}) => {
     auth()
       .sendPasswordResetEmail(email)
       .then(() => {
-        ToastAndroid.show('Send email suscess !', ToastAndroid.SHORT);
+        Toast.show({
+          type: 'info',
+          text1: 'Title',
+          text2: 'Send email suscess ',
+          visibilityTime: 2000,
+          autoHide: true,
+        });
       })
       .catch(error => {
         const errorCode = error.code;
@@ -70,6 +77,7 @@ const ForgotPassword = ({navigation}) => {
           />
         </View>
       </View>
+      <Toast />
     </SafeAreaView>
   );
 };

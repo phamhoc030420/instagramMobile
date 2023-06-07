@@ -1,13 +1,7 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import styles from '../../style/authentication/styleLogin';
-import {
-  Text,
-  View,
-  TextInput,
-  ToastAndroid,
-  StatusBar,
-  Button,
-} from 'react-native';
+import {Text, View, TextInput, StatusBar, Button} from 'react-native';
+import Toast from 'react-native-toast-message';
 import auth from '@react-native-firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -21,7 +15,13 @@ const Login = ({navigation}) => {
   const handleLogIn = async () => {
     // navigation.navigate('MainRoute');
     if (!email === true || !passWord === true) {
-      ToastAndroid.show('Please enter !', ToastAndroid.SHORT);
+      Toast.show({
+        type: 'info',
+        text1: 'Title',
+        text2: 'Please enter !',
+        visibilityTime: 2000,
+        autoHide: true,
+      });
       return;
     }
     auth()
@@ -40,7 +40,13 @@ const Login = ({navigation}) => {
               setUserRole('user');
             }
             await authenticate(idToken);
-            ToastAndroid.show('Login success !', ToastAndroid.SHORT);
+            Toast.show({
+              type: 'success',
+              text1: 'Title',
+              text2: 'Login success',
+              visibilityTime: 2000,
+              autoHide: true,
+            });
             setEmail('');
             setPassWord('');
             navigation.navigate('MainRoute');
@@ -52,7 +58,13 @@ const Login = ({navigation}) => {
       .catch(error => {
         setEmail('');
         setPassWord('');
-        ToastAndroid.show('Wrong account or password !', ToastAndroid.SHORT);
+        Toast.show({
+          type: 'error',
+          text1: 'Title',
+          text2: 'Wrong account or password!',
+          visibilityTime: 2000,
+          autoHide: true,
+        });
       });
   };
   const handleLoginGoogle = () => {
@@ -124,6 +136,7 @@ const Login = ({navigation}) => {
           />
         </View>
       </View>
+      <Toast />
     </SafeAreaView>
   );
 };

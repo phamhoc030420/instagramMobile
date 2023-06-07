@@ -26,7 +26,6 @@ import {
   ScrollView,
   ActivityIndicator,
   Animated,
-  ToastAndroid,
 } from 'react-native';
 import Detail from './detail';
 import {ThemeContext} from '../../../App';

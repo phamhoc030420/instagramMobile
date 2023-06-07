@@ -5,11 +5,31 @@ import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Slider, Icon, AirbnbRating, Button} from 'react-native-elements';
 import {ListItem, SpeedDial} from '@rneui/themed';
 import TabBar from '../tab/tabBar';
+import DatePicker from 'react-native-date-picker';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
+import SelectDropdown from 'react-native-select-dropdown';
 const SliderStar = ({navigation}) => {
+  const countries = [
+    'Egypt',
+    'Canada',
+    'Australia',
+    'Ireland',
+    'Egypt',
+    'Canada',
+    'Australia',
+    'Ireland',
+    'Egypt',
+    'Canada',
+    'Australia',
+    'Ireland',
+  ];
   const insets = useSafeAreaInsets();
   const [value, setValue] = useState(0);
   const [vertValue, setVertValue] = useState(0);
   const [open, setOpen] = useState(false);
+  const [date, setDate] = useState(new Date());
+  const [openDate, setOpenDate] = useState(false);
   const interpolate = (start, end) => {
     let k = (value - 0) / 100; // 0 =>min  && 10 => MAX
     return Math.ceil((1 - k) * start + k * end) % 256;
@@ -75,12 +95,64 @@ const SliderStar = ({navigation}) => {
                 buttonStyle={{minHeight: '100%', backgroundColor: 'red'}}
               />
             )}>
-            {/* <Icon name="My Icon" /> */}
             <ListItem.Content>
               <ListItem.Title>Hello Swiper</ListItem.Title>
             </ListItem.Content>
             <ListItem.Chevron />
           </ListItem.Swipeable>
+          <Button title="Choose Date" onPress={() => setOpenDate(true)} />
+          <Text style={{color: 'black', fontSize: 20, marginTop: 20}}>
+            {date.toDateString()}
+          </Text>
+          <DatePicker
+            modal
+            open={openDate}
+            date={date}
+            onConfirm={date => {
+              setOpenDate(false);
+              setDate(date);
+            }}
+            onCancel={() => {
+              setOpenDate(false);
+            }}
+          />
+          <View
+            style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+            <Text style={{color: 'black', fontSize: 20, marginRight: 20}}>
+              City
+            </Text>
+            <SelectDropdown
+              search={true}
+              searchPlaceHolder="Enter your text"
+              dropdownIconPosition="right"
+              defaultValue="aaa"
+              buttonStyle={{
+                backgroundColor: 'white',
+                borderRadius: 10,
+                borderWidth: 0.5,
+                width: 250,
+              }}
+              defaultButtonText="Select City"
+              renderDropdownIcon={() => {
+                <AntDesign
+                  style={{color: 'black'}}
+                  name={'googleplus'}
+                  size={18}
+                />;
+              }}
+              searchInputStyle={true}
+              data={countries}
+              onSelect={(selectedItem, index) => {
+                console.log(selectedItem, index);
+              }}
+              buttonTextAfterSelection={(selectedItem, index) => {
+                return selectedItem;
+              }}
+              rowTextForSelection={(item, index) => {
+                return item;
+              }}
+            />
+          </View>
           {/*  */}
           <SpeedDial
             style={{bottom: 50}}
@@ -100,6 +172,7 @@ const SliderStar = ({navigation}) => {
               onPress={() => console.log('Delete Something')}
             />
           </SpeedDial>
+
           <View style={styles.tabBar}>
             <TabBar active={'user'} />
           </View>

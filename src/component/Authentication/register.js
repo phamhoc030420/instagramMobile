@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from '../../style/authentication/styleLogin';
-import {Text, View, TextInput, ToastAndroid, StatusBar} from 'react-native';
+import {Text, View, TextInput, StatusBar} from 'react-native';
+import Toast from 'react-native-toast-message';
 // import {authentication} from '../../../firebase/firebase-config';
 // import {createUserWithEmailAndPassword} from 'firebase/auth';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -18,13 +19,25 @@ const Register = ({navigation}) => {
       .then(userCredential => {
         setIsSign(true);
         const user = userCredential.user;
-        ToastAndroid.show('Register success !', ToastAndroid.SHORT);
+        Toast.show({
+          type: 'success',
+          text1: 'Title',
+          text2: 'Register success !',
+          visibilityTime: 2000,
+          autoHide: true,
+        });
         navigation.navigate('Authentication');
       })
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        ToastAndroid.show('Register error !', ToastAndroid.SHORT);
+        Toast.show({
+          type: 'error',
+          text1: 'Title',
+          text2: 'Register error !',
+          visibilityTime: 2000,
+          autoHide: true,
+        });
       });
   };
   return (
@@ -83,6 +96,7 @@ const Register = ({navigation}) => {
           />
         </View>
       </View>
+      <Toast />
     </SafeAreaView>
   );
 };
