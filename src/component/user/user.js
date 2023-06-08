@@ -211,7 +211,7 @@ const User = ({navigation}) => {
                   navigation.navigate('Viu');
                 }}
                 type="outline"
-                containerStyle={{width: 200, marginTop: 50}}
+                containerStyle={{width: 200, marginTop: 50, left: '25%'}}
                 title="Viu"
               />
             </View>

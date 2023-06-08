@@ -5,8 +5,10 @@ import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Card} from '@rneui/themed';
-const Visit = ({navigation}) => {
+import {useTranslation} from 'react-i18next';
+const Visit = ({navigation: {goBack}}) => {
   const insets = useSafeAreaInsets();
+  const {t, i18n} = useTranslation();
   return (
     <>
       <SafeAreaView
@@ -26,15 +28,14 @@ const Visit = ({navigation}) => {
               <Text style={styles.textVisit2}>12/08 - 15/08</Text>
             </View>
             <MaterialCommunityIcons
+              onPress={() => goBack()}
               name={'image-filter-tilt-shift'}
               size={32}
             />
           </View>
           <View style={styles.visitContent}>
             <ScrollView>
-              <Text style={styles.textVisit}>
-                10 người có lịch trình phù hợp với bạn
-              </Text>
+              <Text style={styles.textVisit}>{t('textPageNext')}</Text>
               <Card
                 containerStyle={{
                   borderRadius: 12,

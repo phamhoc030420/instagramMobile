@@ -1,17 +1,24 @@
 import React, {useState} from 'react';
 import styles from './style';
-import {View, Text, Image, StatusBar, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StatusBar,
+  TextInput,
+  Dimensions,
+} from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Slider, Icon, AirbnbRating, Button} from 'react-native-elements';
-import {ListItem, SpeedDial} from '@rneui/themed';
-import TabBar from '../tab/tabBar';
-import DatePicker from 'react-native-date-picker';
+import {Button} from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import SelectDropdown from 'react-native-select-dropdown';
-import {Input} from '@rneui/themed';
+import {useTranslation} from 'react-i18next';
 const Viu = ({navigation}) => {
+  const {t, i18n} = useTranslation();
   const insets = useSafeAreaInsets();
+  const windowWidth = Dimensions.get('window').width;
+  const locationIcon = (windowWidth - 64 - 263) / 2 + 5;
+  const viewUp = (windowWidth - 337) / 2 + 50;
   return (
     <>
       <SafeAreaView
@@ -26,24 +33,48 @@ const Viu = ({navigation}) => {
         <StatusBar barStyle="dark-content" backgroundColor="#FCE5EB" />
         <View style={styles.customFigma}>
           <View style={styles.headerViu}>
-            <Image
-              style={styles.imageTiTle}
-              source={require('./assest/title.png')}
-            />
-            <Text style={styles.textHeader}>Viu</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={styles.imageTiTle}
+                source={require('./assest/title.png')}
+              />
+              <Text style={styles.textHeader}>Viu</Text>
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text
+                onPress={() => {
+                  i18n.changeLanguage('vi');
+                }}
+                style={{color: '#E45C81'}}>
+                VI /{' '}
+              </Text>
+              <Text
+                onPress={() => {
+                  i18n.changeLanguage('en');
+                }}
+                style={{color: '#E45C81'}}>
+                EN
+              </Text>
+            </View>
           </View>
           <View style={styles.modal}>
-            <Text style={styles.modalText}>Bạn dự định đi đâu?</Text>
+            <Text style={styles.modalText}>{t('title')}</Text>
+
             <Ionicons
-              style={styles.iconInput1}
+              style={[styles.iconInput1, {left: locationIcon}]}
               name={'md-location-outline'}
               size={20}
             />
+            <TextInput
+              placeholder={t('localtion')}
+              style={styles.inputViu}></TextInput>
 
-            <TextInput placeholder="Địa điểm" style={styles.inputViu} />
-
-            <Fontisto style={styles.iconInput2} name={'date'} size={20} />
-            <TextInput placeholder="Thời gian" style={styles.inputViu} />
+            <Fontisto
+              style={[styles.iconInput2, {left: locationIcon}]}
+              name={'date'}
+              size={20}
+            />
+            <TextInput placeholder={t('time')} style={styles.inputViu} />
             <Button
               onPress={() => navigation.navigate('Visit')}
               containerStyle={{
@@ -51,7 +82,7 @@ const Viu = ({navigation}) => {
                 borderRadius: 12,
                 width: 263,
               }}
-              title="Tìm kiếm"
+              title={t('search')}
             />
           </View>
           <View style={styles.imageBottom}>
@@ -59,10 +90,8 @@ const Viu = ({navigation}) => {
               style={styles.imageViu}
               source={require('./assest/imageViu.png')}
             />
-            <View style={styles.upModal}>
-              <Text style={styles.textup}>
-                Kết nối trải nghiệm tìm bạn đồng hành{' '}
-              </Text>
+            <View style={[styles.upModal, {left: viewUp}]}>
+              <Text style={styles.textup}>{t('content')}</Text>
             </View>
           </View>
         </View>

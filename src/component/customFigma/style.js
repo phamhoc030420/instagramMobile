@@ -8,8 +8,9 @@ const styles = StyleSheet.create({
   headerViu: {
     flexDirection: 'row',
     marginTop: 54,
-    marginLeft: 33,
+    marginHorizontal: 33,
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   textHeader: {
     marginLeft: 5.5,
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FCE5EB',
     position: 'absolute',
     top: 60,
-    left: 55,
+    // left: 55,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -79,13 +80,11 @@ const styles = StyleSheet.create({
   },
   iconInput1: {
     position: 'absolute',
-    left: 25,
     top: 85,
     zIndex: 1,
   },
   iconInput2: {
     position: 'absolute',
-    left: 25,
     top: 150,
     zIndex: 1,
   },
@@ -117,8 +116,8 @@ const styles = StyleSheet.create({
     marginTop: 11,
     borderTopLeftRadius: 32,
     borderTopRightRadius: 32,
-    height: '100%',
     width: '100%',
+    overflow: 'hidden',
   },
   textVisit: {
     textAlign: 'center',
