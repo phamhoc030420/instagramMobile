@@ -13,6 +13,7 @@ import AutheRoute from './src/routes/authenRoute';
 import RNBootSplash from 'react-native-bootsplash';
 export const ThemeContext = createContext();
 import * as Keychain from 'react-native-keychain';
+import jwtDecode from 'jwt-decode';
 const App = () => {
   const [datas, setDatas] = useState([]);
   const [idToken, setIdToken] = useState('');
@@ -36,7 +37,8 @@ const App = () => {
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             console.log('You can use the POST NOTIFICATIONS');
           } else {
-            BackHandler.exitApp();
+            // BackHandler.exitApp();
+            console.log('aa');
           }
         }
       } catch (err) {
@@ -106,6 +108,16 @@ const App = () => {
         if (credentials) {
           const token = credentials.password;
           setToken(token);
+          const ressult = jwtDecode(token);
+          const expirationTime = ressult.exp;
+
+          // Kiểm tra hạn của token
+          if (expirationTime && Date.now() >= expirationTime * 1000) {
+            console.log('Token đã hết hạn');
+            await removeValue();
+          } else {
+            console.log('Token còn hiệu lực');
+          }
         } else {
           console.log('Không tìm thấy giá trị');
         }

@@ -206,6 +206,14 @@ const User = ({navigation}) => {
                   value={isEnabled}
                 />
               </View>
+              <Button
+                onPress={() => {
+                  navigation.navigate('Viu');
+                }}
+                type="outline"
+                containerStyle={{width: 200, marginTop: 50, left: '25%'}}
+                title="Viu"
+              />
             </View>
             {/* Bottom modal button Menu */}
             <BottomSheetModalProvider>
